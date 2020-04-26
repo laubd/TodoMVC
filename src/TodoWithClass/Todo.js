@@ -57,7 +57,7 @@ class App extends Component {
     (list) => list.filter(item => item.status === TODO_STATUS.ACTIVE).length
   )
 
-  updateCurrentStatus = (currentStatus) => {
+  handleUpdateCurrentStatus = (currentStatus) => {
     this.setState({ currentStatus })
   }
 
@@ -142,14 +142,14 @@ class App extends Component {
     return <div>
       <TodoInputBar
         value={value}
-        onInputChange={this.handleInputChange}
+        onChange={this.handleInputChange}
         onEnter={this.handleAddItem}
       />
 
       <TodoFilter
         active={currentStatus}
         options={filterOptions}
-        onClick={this.updateCurrentStatus}
+        onClick={this.handleUpdateCurrentStatus}
       />
 
       <TodoList

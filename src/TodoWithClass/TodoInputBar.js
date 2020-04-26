@@ -1,17 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import {Input} from 'antd'
 
-export default class TodoInputBar extends PureComponent {
-  render () {
-    const { value, onEnter } = this.props
-
-    return <div>
-      <Input
-        className="todo-input-bar__input"
-        value={value}
-        onPressEnter={onEnter}
-        onChange={e => this.props.onInputChange(e.target.value)}
-      />
-    </div>
-  }
+function TodoInputBar (props) {
+  const { value, onEnter, onChange } = props
+  return <div>
+    <Input
+      className="todo-input-bar__input"
+      value={value}
+      onPressEnter={onEnter}
+      onChange={e => onChange(e.target.value)}
+    />
+  </div>
 }
+
+export default React.memo(TodoInputBar)
