@@ -1,0 +1,47 @@
+@import './todo';
+
+body{
+  font-size: 18px;
+  background-color: snow;
+}
+
+ul{
+  list-style: none;
+  padding-left: 0;
+}
+
+.container{
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.button{
+  color: #666;
+}
+
+.title{
+  text-align: center;
+  font-style: italic;
+}
+
+.fade-move-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.fade-move-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity .3s, transform .3s;
+}
+.fade-move-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.fade-move-exit-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  transition: opacity .4s, transform .2s;
+}
