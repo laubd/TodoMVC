@@ -70,14 +70,9 @@ class App extends Component {
     })
   }
 
-  handleItemStatusUpdate = (id, toStatus) => {
-    if (!id) return
-    TodoService.update(id, { status: toStatus }).then(() => this.getTodoList())
-  }
-
-  handleUpdateItem = (id, title) => {
-    if (!id || !title) return
-    TodoService.update(id, { title }).then(() => this.getTodoList())
+  handleUpdateItem = (id, data) => {
+    if (!id || !data) return
+    TodoService.update(id, data).then(() => this.getTodoList())
   }
 
   handleDeleteItem = (id) => {
@@ -135,7 +130,6 @@ class App extends Component {
                   option={data}
                   onDelete={this.handleDeleteItem}
                   onUpdate={this.handleUpdateItem}
-                  onStatusUpdate={this.handleItemStatusUpdate}
                 />)
             }
           </>

@@ -18,14 +18,14 @@ class TodoListItem extends PureComponent {
   handleDone = () => {
     const { id, status } = this.props.option
     const { ACTIVE, DONE } = TODO_STATUS
-    this.props.onStatusUpdate(id, status === ACTIVE ? DONE : ACTIVE)
+    this.props.onUpdate(id, { status: status === ACTIVE ? DONE : ACTIVE })
   }
 
   handleRenameTitle = () => {
     const { id, title } = this.props.option
     const { currentTitle } = this.state
     if (title !== currentTitle) {
-      this.props.onUpdate(id, currentTitle)
+      this.props.onUpdate(id, { title: currentTitle })
     }
     this.resetEditable()
   }
