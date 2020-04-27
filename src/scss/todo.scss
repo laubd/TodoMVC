@@ -49,11 +49,11 @@
       white-space: nowrap;
     }
 
-    &__item__input{
+    & &__item__input{
       flex: 1;
       border: 0;
-      font-size: 18px;
       padding: 0;
+      font-size: 14px;
       &:focus{
         box-shadow: none;
       }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import memoizeOne from 'memoize-one'
-import shortId from 'shortid'
 import {
   spring,
   presets
@@ -12,8 +11,8 @@ import TodoList from './TodoList'
 import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
 
-import { TODO_STATUS } from '../constants'
-import * as TodoService from '../services/todo.service'
+import { TODO_STATUS } from '../../constants'
+import * as TodoService from '../../services/todo.service'
 
 class App extends Component {
   constructor (props) {
@@ -77,11 +76,7 @@ class App extends Component {
     let { value } = this.state
     value = value.trim()
     if (!value) return
-    TodoService.create({
-      id: shortId.generate(),
-      title: value,
-      status: TODO_STATUS.ACTIVE
-    }).then(() => {
+    TodoService.create(value, TODO_STATUS.ACTIVE).then(() => {
       this.getTodoList()
       this.setState({
         value: ''

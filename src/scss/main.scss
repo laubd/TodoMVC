@@ -1,7 +1,7 @@
+@import './nav';
 @import './todo';
 
 body{
-  font-size: 18px;
   background-color: snow;
 }
 
@@ -10,7 +10,7 @@ ul{
   padding-left: 0;
 }
 
-.container{
+#root{
   max-width: 560px;
   margin: 0 auto;
   padding: 20px;

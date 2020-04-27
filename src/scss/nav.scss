@@ -1,0 +1,17 @@
+.nav{
+  position: relative;
+  margin-bottom: 20px;
+
+  .nav__list{
+    display: flex;
+  }
+
+  .nav__item{
+    padding: 0 8px;
+  }
+
+  .nav__item + .nav__item{
+    // margin-left: 10px;
+    border-left: 1px solid #ccc;
+  }
+}

@@ -1,3 +1,4 @@
+import shortId from 'shortid'
 import { getTodoList, setTodoList } from '../storage/todo.storage'
 import { TODO_STATUS } from '../constants'
 
@@ -11,9 +12,13 @@ export const get = () => {
   })
 }
 
-export const create = (todo) => {
+export const create = (todoContent, todoStatus) => {
   return new Promise(resolve => {
-    data = data.concat(todo)
+    data = data.concat({
+      id: shortId.generate(),
+      title: todoContent,
+      status: todoStatus
+    })
     setTodoList(data)
     resolve()
   })
