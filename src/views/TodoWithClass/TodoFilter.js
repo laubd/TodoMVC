@@ -4,7 +4,6 @@ import { Button } from 'antd'
 
 function TodoFilter (props) {
   const { options, onClick, active } = props
-  console.log('filter')
   return (
     <div className="todo-filter-bar">
       {

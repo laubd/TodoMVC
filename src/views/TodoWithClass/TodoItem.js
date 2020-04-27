@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 import { Checkbox, Button, Input } from 'antd'
-import { TODO_STATUS } from '../../constants'
+import { TODO_STATUS } from '../../helper/constants'
 
 class TodoListItem extends PureComponent {
   constructor (props) {

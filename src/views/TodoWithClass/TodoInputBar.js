@@ -3,7 +3,6 @@ import {Input} from 'antd'
 
 function TodoInputBar (props) {
   const { value, onEnter, onChange } = props
-  console.log('input bar')
   return <div>
     <Input
       className="todo-input-bar__input"

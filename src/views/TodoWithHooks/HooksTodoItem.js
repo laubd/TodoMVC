@@ -7,12 +7,13 @@ import React, {
 import classnames from 'classnames'
 import { Input, Button, Checkbox } from 'antd'
 
-import { useBind } from './util'
-import { TODO_STATUS } from '../../constants'
+import { useBind } from '../../helper/hooks'
+import { TODO_STATUS } from '../../helper/constants'
 
 function HooksTodoItem (props) {
   const {
     todo: { id, title, status },
+    style,
     onUpdate,
     onDelete
   } = props
@@ -26,7 +27,6 @@ function HooksTodoItem (props) {
     'todo-list__item': true,
     'todo-list__item--done': isDone
   })
-  console.log('item', id)
 
   function handleRenameTitle () {
     if (title !== todoContent.value) {
@@ -47,7 +47,7 @@ function HooksTodoItem (props) {
     if (editable) inputRef.current.focus()
   }, [editable])
 
-  return <li className={itemClass}>
+  return <li className={itemClass} style={style}>
     <div className="todo-list__item__main">
       <Checkbox
         className="todo-list__checkbox"

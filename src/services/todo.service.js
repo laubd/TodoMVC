@@ -1,6 +1,6 @@
 import shortId from 'shortid'
 import { getTodoList, setTodoList } from '../storage/todo.storage'
-import { TODO_STATUS } from '../constants'
+import { TODO_STATUS } from '../helper/constants'
 
 let data = getTodoList()
 

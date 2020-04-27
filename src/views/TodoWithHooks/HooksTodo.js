@@ -6,12 +6,14 @@ import React, {
 } from 'react'
 import * as TodoService from '../../services/todo.service'
 
-import { TODO_STATUS } from '../../constants'
+import { TODO_STATUS } from '../../helper/constants'
 import TodoInputBar from '../TodoWithClass/TodoInputBar'
 import TodoFilter from '../TodoWithClass/TodoFilter'
 import TodoFooter from '../TodoWithClass/TodoFooter'
+import TodoList from '../TodoWithClass/TodoList'
 import HooksTodoItem from './HooksTodoItem'
-import { useBind } from './util'
+import { useBind } from '../../helper/hooks'
+import { todoStyleNormalize, todoWillEnter, todoWillLeave } from '../../helper/animation'
 
 function HooksTodo () {
   const [ todoList, refreshTodoList ] = useTodoList([])
@@ -24,7 +26,10 @@ function HooksTodo () {
   ]), [])
 
   const filteredList = useMemo(() => {
-    return selectedStatus === TODO_STATUS.ALL ? todoList : todoList.filter(item => item.status === selectedStatus)
+    const list= selectedStatus === TODO_STATUS.ALL
+      ? todoList
+      : todoList.filter(item => item.status === selectedStatus)
+    return list.map(todoStyleNormalize)
   }, [todoList, selectedStatus])
 
   const activeTodoCount = useMemo(() => {
@@ -59,18 +64,27 @@ function HooksTodo () {
   return <div>
     <TodoInputBar {...newTodo} onEnter={createTodo} />
     <TodoFilter options={filterOptions} active={selectedStatus} onClick={setStatus}></TodoFilter>
-    <div className="todo-list">
-      {
-        filteredList.map(item => {
-          return <HooksTodoItem
-            key={item.id}
-            todo={item}
-            onUpdate={updateTodo}
-            onDelete={removeTodo}
-          />
-        })
-      }
-    </div>
+    <TodoList
+      list={filteredList}
+      willLeave={todoWillLeave}
+      willEnter={todoWillEnter}
+    >
+      {styles => (
+        <>
+          {
+            styles.map(({key, style, data}) => {
+              return <HooksTodoItem
+                key={key}
+                style={style}
+                todo={data}
+                onUpdate={updateTodo}
+                onDelete={removeTodo}
+              />
+            })
+          }
+        </>
+      )}
+      </TodoList>
     <TodoFooter count={activeTodoCount} onClear={removeDoneTodo}/>
   </div>
 }

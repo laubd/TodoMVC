@@ -1,24 +1,25 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import {
   TransitionMotion,
 } from 'react-motion'
 
-export default class TodoList extends PureComponent {
-  render () {
-    const { list, willLeave, willEnter } = this.props
-    return (
-      <TransitionMotion
-        styles={list}
-        willLeave={willLeave}
-        willEnter={willEnter}>
-          {
-            styles => (
-              <ul className="todo-list">
-                {this.props.children(styles)}
-              </ul>
-            )
-          }
-      </TransitionMotion>
-    )
-  }
+function TodoList (props) {
+  const { list, willLeave, willEnter } = props
+  return (
+    <TransitionMotion
+      styles={list}
+      willLeave={willLeave}
+      willEnter={willEnter}
+    >
+      {
+        styles => (
+          <ul className="todo-list">
+            {props.children(styles)}
+          </ul>
+        )
+      }
+    </TransitionMotion>
+  )
 }
+
+export default memo(TodoList)

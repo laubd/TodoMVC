@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import memoizeOne from 'memoize-one'
-import {
-  spring,
-  presets
-} from 'react-motion'
 
 import TodoInputBar from './TodoInputBar'
 import TodoFilter from './TodoFilter'
@@ -11,8 +7,9 @@ import TodoList from './TodoList'
 import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
 
-import { TODO_STATUS } from '../../constants'
+import { TODO_STATUS } from '../../helper/constants'
 import * as TodoService from '../../services/todo.service'
+import { todoStyleNormalize, todoWillEnter, todoWillLeave } from '../../helper/animation'
 
 class App extends Component {
   constructor (props) {
@@ -36,18 +33,7 @@ class App extends Component {
   filter = memoizeOne(
     (list, status) => {
       const activeList = status === TODO_STATUS.ALL ? list : list.filter(item => item.status === status)
-      return activeList.map((todo, i) => {
-        // 返回react-motion结构
-        return {
-          data: todo,
-          key: todo.id,
-          style: {
-            height: spring(48, presets.gentle),
-            opacity: spring(1, presets.gentle),
-            marginBottom: spring(10, presets.gentle)
-          }
-        }
-      })
+      return activeList.map(todoStyleNormalize)
     }
   )
 
@@ -103,22 +89,9 @@ class App extends Component {
     TodoService.removeDone().then(() => this.getTodoList())
   }
 
-  willEnter() {
-    return {
-      height: 0,
-      opacity: 1,
-      marginBottom: 0
-    }
-  }
+  willEnter = todoWillEnter
 
-  willLeave() {
-    return {
-      height: spring(0),
-      opacity: spring(0),
-      marginBottom: spring(0),
-      border: 0
-    }
-  }
+  willLeave = todoWillLeave
 
   componentDidMount () {
     this.getTodoList()
