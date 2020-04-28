@@ -3,9 +3,9 @@ import memoizeOne from 'memoize-one'
 
 import TodoInputBar from './TodoInputBar'
 import TodoFilter from './TodoFilter'
-import TodoList from './TodoList'
-import TodoItem from './TodoItem'
 import TodoFooter from './TodoFooter'
+import TodoListItem from './TodoItem'
+import TodoList from './TodoList'
 
 import { TODO_STATUS } from '../../helper/constants'
 import * as TodoService from '../../services/todo.service'
@@ -84,10 +84,6 @@ class App extends Component {
     TodoService.removeDone().then(() => this.getTodoList())
   }
 
-  willEnter = todoWillEnter
-
-  willLeave = todoWillLeave
-
   componentDidMount () {
     this.getTodoList()
   }
@@ -117,24 +113,12 @@ class App extends Component {
 
       <TodoList
         list={filteredList}
-        willLeave={this.willLeave}
-        willEnter={this.willEnter}
-      >
-        {styles => (
-          <>
-            {
-              styles.map(({key, style, data}) =>
-                <TodoItem
-                  key={key}
-                  style={style}
-                  option={data}
-                  onDelete={this.handleDeleteItem}
-                  onUpdate={this.handleUpdateItem}
-                />)
-            }
-          </>
-        )}
-      </TodoList>
+        willLeave={todoWillLeave}
+        willEnter={todoWillEnter}
+        ListItem={TodoListItem}
+        onDelete={this.handleDeleteItem}
+        onUpdate={this.handleUpdateItem}
+      />
       {
         list.length
           ? <TodoFooter count={leftActiveItems} onClear={this.handleClearDone} />

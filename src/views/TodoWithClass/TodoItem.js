@@ -9,20 +9,20 @@ class TodoListItem extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      currentTitle: props.option.title,
+      currentTitle: props.todo.title,
       editable: false
     }
     this.inputRef = React.createRef()
   }
 
   handleDone = () => {
-    const { id, status } = this.props.option
+    const { id, status } = this.props.todo
     const { ACTIVE, DONE } = TODO_STATUS
     this.props.onUpdate(id, { status: status === ACTIVE ? DONE : ACTIVE })
   }
 
   handleRenameTitle = () => {
-    const { id, title } = this.props.option
+    const { id, title } = this.props.todo
     const { currentTitle } = this.state
     if (title !== currentTitle) {
       this.props.onUpdate(id, { title: currentTitle })
@@ -31,7 +31,7 @@ class TodoListItem extends PureComponent {
   }
 
   setEditable = () => {
-    if (this.props.option.status === TODO_STATUS.ACTIVE) {
+    if (this.props.todo.status === TODO_STATUS.ACTIVE) {
       this.setState({ editable: true })
     }
   }
@@ -48,9 +48,9 @@ class TodoListItem extends PureComponent {
 
   componentDidUpdate (prevProps, prevState) {
     // props改变更新当前input内容
-    if (prevProps.option.title !== this.props.option.title) {
+    if (prevProps.todo.title !== this.props.todo.title) {
       this.setState({
-        currentTitle: this.props.option.title
+        currentTitle: this.props.todo.title
       })
     }
     // 点击进入可修改状态时focus
@@ -60,9 +60,9 @@ class TodoListItem extends PureComponent {
   }
 
   render () {
-    const { option, onDelete, style } = this.props
+    const { todo, onDelete, style } = this.props
     const { currentTitle, editable } = this.state
-    const { status, id } = option
+    const { status, id } = todo
     const isDone = status === TODO_STATUS.DONE
     const itemClass = classnames({
       'todo-list__item': true,
@@ -96,13 +96,14 @@ class TodoListItem extends PureComponent {
 }
 
 TodoListItem.propTypes = {
-  option: PropTypes.exact({
+  todo: PropTypes.exact({
     id: PropTypes.string,
     status: PropTypes.number,
     title: PropTypes.string
   }).isRequired,
-  onDelete: PropTypes.func,
-  style: PropTypes.object
+  onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  style: PropTypes.object.isRequired
 }
 
 export default TodoListItem

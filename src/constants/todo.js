@@ -1,0 +1,2 @@
+export const SET_TODO = 'SET_TODO'
+export const SET_SELECTED_STATUS = 'SET_SELECTED_STATUS'

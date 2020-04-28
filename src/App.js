@@ -9,6 +9,7 @@ import './scss/main.scss'
 
 const Todo = lazy(() => import('./views/TodoWithClass/Todo'))
 const HooksTodo = lazy(() => import('./views/TodoWithHooks/HooksTodo'))
+const ReduxTodo = lazy(() => import('./views/TodoWIthRedux/ReduxTodo'))
 
 class App extends Component {
   constructor (props) {
@@ -16,7 +17,8 @@ class App extends Component {
     this.state = {
       routes: [
         { label: 'Todo With Class', href: '/'  },
-        { label: 'Todo With Hooks', href: '/hooks'  }
+        { label: 'Todo With Hooks', href: '/hooks'  },
+        { label: 'Todo With Redux', href: '/redux'  },
       ]
     }
   }
@@ -38,6 +40,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Todo}/>
           <Route exact path="/hooks" component={HooksTodo}/>
+          <Route exact path="/redux" component={ReduxTodo}/>
         </Switch>
       </Suspense>
     </Router>

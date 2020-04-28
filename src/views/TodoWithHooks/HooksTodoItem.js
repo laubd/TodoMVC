@@ -5,6 +5,7 @@ import React, {
   useEffect
 } from 'react'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 import { Input, Button, Checkbox } from 'antd'
 
 import { useBind } from '../../helper/hooks'
@@ -70,6 +71,17 @@ function HooksTodoItem (props) {
     </div>
     <Button type="link" onClick={() => onDelete(id)}>&times;</Button>
   </li>
+}
+
+HooksTodoItem.propTypes = {
+  todo: PropTypes.exact({
+    id: PropTypes.string,
+    status: PropTypes.number,
+    title: PropTypes.string
+  }).isRequired,
+  onDelete: PropTypes.func,
+  onUpdate: PropTypes.func,
+  style: PropTypes.object
 }
 
 export default memo(HooksTodoItem)

@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   TransitionMotion,
 } from 'react-motion'
 
 function TodoList (props) {
-  const { list, willLeave, willEnter } = props
+  const { list, willLeave, willEnter, ListItem, ...events } = props
   return (
     <TransitionMotion
       styles={list}
@@ -14,7 +15,15 @@ function TodoList (props) {
       {
         styles => (
           <ul className="todo-list">
-            {props.children(styles)}
+            {
+              styles.map(({key, style, data}) =>
+                <ListItem
+                  key={key}
+                  style={style}
+                  todo={data}
+                  {...events}
+                />)
+            }
           </ul>
         )
       }
@@ -22,4 +31,12 @@ function TodoList (props) {
   )
 }
 
+TodoList.propTypes = {
+  list: PropTypes.array.isRequired,
+  willLeave: PropTypes.func.isRequired,
+  willEnter: PropTypes.func.isRequired,
+  ListItem: PropTypes.any.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+}
 export default memo(TodoList)

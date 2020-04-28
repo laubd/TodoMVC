@@ -4,15 +4,16 @@ import React, {
   useMemo,
   useCallback
 } from 'react'
-import * as TodoService from '../../services/todo.service'
 
-import { TODO_STATUS } from '../../helper/constants'
 import TodoInputBar from '../TodoWithClass/TodoInputBar'
 import TodoFilter from '../TodoWithClass/TodoFilter'
 import TodoFooter from '../TodoWithClass/TodoFooter'
 import TodoList from '../TodoWithClass/TodoList'
 import HooksTodoItem from './HooksTodoItem'
+
 import { useBind } from '../../helper/hooks'
+import { TODO_STATUS } from '../../helper/constants'
+import * as TodoService from '../../services/todo.service'
 import { todoStyleNormalize, todoWillEnter, todoWillLeave } from '../../helper/animation'
 
 function HooksTodo () {
@@ -63,28 +64,19 @@ function HooksTodo () {
 
   return <div>
     <TodoInputBar {...newTodo} onEnter={createTodo} />
-    <TodoFilter options={filterOptions} active={selectedStatus} onClick={setStatus}></TodoFilter>
+    <TodoFilter
+      options={filterOptions}
+      active={selectedStatus}
+      onClick={setStatus}
+    />
     <TodoList
       list={filteredList}
       willLeave={todoWillLeave}
       willEnter={todoWillEnter}
-    >
-      {styles => (
-        <>
-          {
-            styles.map(({key, style, data}) => {
-              return <HooksTodoItem
-                key={key}
-                style={style}
-                todo={data}
-                onUpdate={updateTodo}
-                onDelete={removeTodo}
-              />
-            })
-          }
-        </>
-      )}
-      </TodoList>
+      ListItem={HooksTodoItem}
+      onUpdate={updateTodo}
+      onDelete={removeTodo}
+    />
     <TodoFooter count={activeTodoCount} onClear={removeDoneTodo}/>
   </div>
 }
