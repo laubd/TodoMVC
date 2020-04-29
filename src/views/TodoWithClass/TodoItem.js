@@ -90,7 +90,13 @@ class TodoListItem extends PureComponent {
             : <span className="todo-list__item__text" onClick={this.setEditable}>{currentTitle}</span>
         }
       </div>
-      <Button type="link" onClick={() => onDelete(id)}>&times;</Button>
+      <Button
+        type="link"
+        onClick={() => onDelete(id)}
+        data-testid="deleteBtn"
+      >
+        &times;
+      </Button>
     </li>
   }
 }
@@ -101,9 +107,9 @@ TodoListItem.propTypes = {
     status: PropTypes.number,
     title: PropTypes.string
   }).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired
+  onDelete: PropTypes.func,
+  onUpdate: PropTypes.func,
+  style: PropTypes.object
 }
 
 export default TodoListItem

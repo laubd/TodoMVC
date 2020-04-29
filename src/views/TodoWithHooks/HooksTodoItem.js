@@ -69,7 +69,13 @@ function HooksTodoItem (props) {
           : <span className="todo-list__item__text" onClick={editContent}>{todoContent.value}</span>
       }
     </div>
-    <Button type="link" onClick={() => onDelete(id)}>&times;</Button>
+    <Button
+        type="link"
+        onClick={() => onDelete(id)}
+        data-testid="deleteBtn"
+      >
+        &times;
+      </Button>
   </li>
 }
 

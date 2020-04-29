@@ -18,7 +18,7 @@ class App extends Component {
       routes: [
         { label: 'Todo With Class', href: '/'  },
         { label: 'Todo With Hooks', href: '/hooks'  },
-        { label: 'Todo With Redux', href: '/redux'  },
+        { label: 'Todo With Redux', href: '/redux'  }
       ]
     }
   }

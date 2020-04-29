@@ -30,7 +30,8 @@ TodoFilter.propTypes = {
       label: PropTypes.string,
       status: PropTypes.number
     })
-  )
+  ),
+  onClick: PropTypes.func
 }
 
 export default memo(TodoFilter)
