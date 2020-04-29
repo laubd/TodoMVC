@@ -22,6 +22,13 @@ export const selectFilteredTodoList = createSelector(
   }
 )
 
+export const selectActiveTodoCount = createSelector(
+  selectTodoList,
+  (todoList) => {
+    return todoList.filter(item => item.status === TODO_STATUS.ACTIVE).length
+  }
+)
+
 export default function app (state = INITIAL_STATE, action) {
   switch (action.type) {
     case TYPES.SET_TODO: {

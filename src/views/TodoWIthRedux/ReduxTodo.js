@@ -9,7 +9,7 @@ import TodoFooter from '../TodoWithClass/TodoFooter'
 
 import { TODO_STATUS } from '../../helper/constants'
 import * as TodoActionCreator from '../../actions/todo'
-import { selectFilteredTodoList } from '../../reducers/todo'
+import { selectFilteredTodoList, selectActiveTodoCount } from '../../reducers/todo'
 import { todoWillEnter, todoWillLeave } from '../../helper/animation'
 
 class ReduxTodo extends Component {
@@ -106,7 +106,7 @@ export default connect(
     return {
       todoList: todo.todoList,
       filteredTodoList: selectFilteredTodoList(state),
-      activeTodoCount: todo.todoList.length,
+      activeTodoCount: selectActiveTodoCount(state),
       selectedStatus: todo.selectedStatus
     }
   },

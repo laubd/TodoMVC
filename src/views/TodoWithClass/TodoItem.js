@@ -72,7 +72,7 @@ class TodoListItem extends PureComponent {
       <div className="todo-list__item__main" >
         <Checkbox
           className="todo-list__checkbox"
-          defaultChecked={isDone}
+          checked={isDone}
           onChange={this.handleDone}
         />
         {
